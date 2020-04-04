@@ -1,0 +1,131 @@
+
+====================================================================================================
+RECURSION CLASS
+====================================================================================================
+
+==================================================> increasing order using recursion.
+
+0  1  2  3  4  5  6  7  8  9  10 
+==================================================> decreasing order using recursion.
+
+10 9  8  7  6  5  4  3  2  1  0  
+==================================================> up and down in recursion.
+
+0  2  4  6  8  10 9  7  5  3  1  
+==================================================> factorial using recursion.
+
+720
+==================================================> power of two.
+
+81
+==================================================> power of two Optimized.
+
+512
+==================================================> touch each node thrice. printPattern(5);
+
+pre 5 ==> pre 4 ==> pre 3 ==> pre 2 ==> base 1 ==> in 2 ==> base 0 ==> post 2 ==> in 3 ==> base 1 ==> post 3 ==> in 4 ==> pre 2 ==> base 1 ==> in 2 ==> base 0 ==> post 2 ==> post 4 ==> in 5 ==> pre 3 ==> pre 2 ==> base 1 ==> in 2 ==> base 0 ==> post 2 ==> in 3 ==> base 1 ==> post 3 ==> post 5 ==> 3
+
+==================================================> find value in array using recursion.
+
+14 found : false
+
+==================================================> find Max value in array using recursion.
+
+Max found : 23
+
+==================================================> print array in forward direction.
+
+23 5 8 10 11 
+==================================================> print array in reverse direction.
+
+11 10 8 5 23 
+==================================================> find first occurance of element.
+
+found at : -1
+
+==================================================> find last occurance of element.
+
+last index found at : -1
+
+==================================================> find all occurance of element.
+
+last index found at : 0 2 5 
+==================================================> reversing string 'abcdefghij' 
+
+jihgfedcba
+
+==================================================> reversing string 'abcdefghij' USING STRINGBUILDER_ V2 
+
+ponmlkjihgfedcba
+
+==================================================> print a pattern... for fun
+
+x 
+  x 
+x   x 
+  x   x 
+x   x   x 
+
+==================================================> Starting tower of hanoi for plates = 3 
+
+shifting plate number 1 from source to destination
+shifting plate number 2 from source to intermediate
+shifting plate number 1 from destination to intermediate
+shifting plate number 3 from source to destination
+shifting plate number 1 from intermediate to source
+shifting plate number 2 from intermediate to destination
+shifting plate number 1 from source to destination
+
+==================================================> find subsequences using VOID type -- one recursion call
+
+[, e, d, de, c, ce, cd, cde, b, be, bd, bde, bc, bce, bcd, bcde, a, ae, ad, ade, ac, ace, acd, acde, ab, abe, abd, abde, abc, abce, abcd, abcde]
+
+==================================================> find subsequences using INT return type -- two recursion call
+
+abc, ab, ac, a, bc, b, c, , 
+size is ==> 8
+
+==================================================> find subsequences using String ascii -- three choices for every char.
+
+[, c, 99, b, 98, bc, 98c, b99, 9899, a, 97, ac, 97c, a99, 9799, ab, 97b, a98, 9798, abc, 97bc, a98c, 9798c, ab99, 97b99, a9899, 979899]
+size is ==> 27
+
+==================================================> find subsequences using String ascii -- three choices for every char Using 3 recursion.
+
+cba, 99ba, ba, c98a, 9998a, 98a, ca, 99a, a, cb97, 99b97, b97, c9897, 999897, 9897, c97, 9997, 97, cb, 99b, b, c98, 9998, 98, c, 99, , 
+total subsequences could be : 27
+
+==================================================> find permutations of string. using One recursion. 
+
+[abcd, bacd, bcad, bcda, acbd, cabd, cbad, cbda, acdb, cadb, cdab, cdba, abdc, badc, bdac, bdca, adbc, dabc, dbac, dbca, adcb, dacb, dcab, dcba]
+size is ==> 24
+
+==================================================> find permutations of string. calls for each character.
+
+abcd, abdc, acbd, acdb, adbc, adcb, bacd, badc, bcad, bcda, bdac, bdca, cabd, cadb, cbad, cbda, cdab, cdba, dabc, dacb, dbac, dbca, dcab, dcba, 
+size is ==> 24
+
+==================================================> find permutations of string. Without duplicates.
+
+aba, aab, baa, 
+size is ==> 3
+
+==================================================> keypad V1 - Return type--> 567 
+
+[rux, sux, tux, rvx, svx, tvx, rwx, swx, twx, ruy, suy, tuy, rvy, svy, tvy, rwy, swy, twy, ruz, suz, tuz, rvz, svz, tvz, rwz, swz, twz]
+size is ==> 27
+
+==================================================> keypad V2 void type--> 567 
+
+dadd, dade, dadf, daed, daee, daef, dafd, dafe, daff, dbdd, dbde, dbdf, dbed, dbee, dbef, dbfd, dbfe, dbff, dcdd, dcde, dcdf, dced, dcee, dcef, dcfd, dcfe, dcff, eadd, eade, eadf, eaed, eaee, eaef, eafd, eafe, eaff, ebdd, ebde, ebdf, ebed, ebee, ebef, ebfd, ebfe, ebff, ecdd, ecde, ecdf, eced, ecee, ecef, ecfd, ecfe, ecff, fadd, fade, fadf, faed, faee, faef, fafd, fafe, faff, fbdd, fbde, fbdf, fbed, fbee, fbef, fbfd, fbfe, fbff, fcdd, fcde, fcdf, fced, fcee, fcef, fcfd, fcfe, fcff, 
+size is = > 81
+
+==================================================> keypad V2 void type--> 1011 - Advance..  
+
+dadd, dade, dadf, daed, daee, daef, dafd, dafe, daff, da~, da^, da+, dbdd, dbde, dbdf, dbed, dbee, dbef, dbfd, dbfe, dbff, db~, db^, db+, dcdd, dcde, dcdf, dced, dcee, dcef, dcfd, dcfe, dcff, dc~, dc^, dc+, ddd, dde, ddf, ded, dee, def, dfd, dfe, dff, eadd, eade, eadf, eaed, eaee, eaef, eafd, eafe, eaff, ea~, ea^, ea+, ebdd, ebde, ebdf, ebed, ebee, ebef, ebfd, ebfe, ebff, eb~, eb^, eb+, ecdd, ecde, ecdf, eced, ecee, ecef, ecfd, ecfe, ecff, ec~, ec^, ec+, edd, ede, edf, eed, eee, eef, efd, efe, eff, fadd, fade, fadf, faed, faee, faef, fafd, fafe, faff, fa~, fa^, fa+, fbdd, fbde, fbdf, fbed, fbee, fbef, fbfd, fbfe, fbff, fb~, fb^, fb+, fcdd, fcde, fcdf, fced, fcee, fcef, fcfd, fcfe, fcff, fc~, fc^, fc+, fdd, fde, fdf, fed, fee, fef, ffd, ffe, fff, *dd, *de, *df, *ed, *ee, *ef, *fd, *fe, *ff, *~, *^, *+, (dd, (de, (df, (ed, (ee, (ef, (fd, (fe, (ff, (~, (^, (+, )dd, )de, )df, )ed, )ee, )ef, )fd, )fe, )ff, )~, )^, )+, 
+size is = > 171
+
+==================================================> keypad V2 void type--> 1020 - Advance.. Single elements for string.. 
+
+kucdae, kucdp, 
+size is = > 2

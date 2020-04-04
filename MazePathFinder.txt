@@ -1,0 +1,10 @@
+
+============================================= : MAZE PATH FINDER : =============================================
+================================================================================================================
+
+================== : With only H & V allowed (source will always be above/inline wrt dest.) : ==================
+HHVV, HVHV, HVVH, VHHV, VHVH, VVHH, 
+Total paths are : 6
+================ : With only H & V & D allowed (source will always be above/inline wrt dest.) : ================
+HHVV, HDV, HVHV, HVD, HVVH, DHV, DD, DVH, VHHV, VHD, VHVH, VDH, VVHH, 
+Total paths are : 13
