@@ -1,6 +1,6 @@
-#JA-D-VA-S
+# JA-D-VA-S
 
-##Description
+## Description
 This repo is the product of pure hard work and zeal to learn DSA.
 
 use below command to execute any java file...
@@ -10,7 +10,7 @@ javac input.java && java input > output.txt
 ```
 
 
-##Topics : 
+## Topics : 
 
 1)  Recursion 
     -  Recursion_001 > will clear your basics regarding Recursion(Permutations/Combinations ....)
