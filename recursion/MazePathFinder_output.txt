@@ -8,3 +8,21 @@ Total paths are : 6
 ================ : With only H & V & D allowed (source will always be above/inline wrt dest.) : ================
 HHVV, HDV, HVHV, HVD, HVVH, DHV, DD, DVH, VHHV, VHD, VHVH, VDH, VVHH, 
 Total paths are : 13
+====== : With only H & V & D allowed (source will always be above/inline wrt dest.) - MULTIMOVE ALLOWED : ======
+H1H1V1V1, H1H1V2, H1D1V1, H1V1H1V1, H1V1D1, H1V1V1H1, H1V2H1, D1H1V1, D1D1, D1V1H1, V1H1H1V1, V1H1D1, V1H1V1H1, V1D1H1, V1V1H1H1, V1V1H2, V1H2V1, H2V1V1, H2V2, D2, V2H1H1, V2H2, 
+Total paths are : 22
+========================== : With only H & V allowed only forward/backward/up/down : ==========================
+[HF.HF.VU.VU.],[HF.HF.VU.HB.VU.HF.],[HF.HF.VU.HB.HB.VU.HF.HF.],[HF.VU.HF.VU.],[HF.VU.VU.HF.],[HF.VU.HB.VU.HF.HF.],[VU.HF.HF.VU.],[VU.HF.VU.HF.],[VU.HF.VD.HF.VU.VU.],[VU.VU.HF.HF.],[VU.VU.HF.VD.HF.VU.],[VU.VU.HF.VD.VD.HF.VU.VU.],
+Total paths are : 12
+=============== : With only H & V allowed. only forward/backward/up/down -- MULTIMOVE ALLOWED : ===============
+
+Total paths are : 64
+==================== : With only H & V & D allowed only forward/backward/up/down/diagonal : ====================
+
+Total paths are : 235
+======================= : Get the height of shortest path in HVD along with the trace : =======================
+
+Shortest paths size : [length : 2, name : DD]
+========== : Get the height of shortest path in HVD 8 direction with MULTIMOVE along with the trace : ==========
+
+Shortest paths size : [length : 8, name : HF.1HF.1VU.1HB.1HB.1VU.1HF.1HF.1]
