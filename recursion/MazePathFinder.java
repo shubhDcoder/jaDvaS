@@ -66,7 +66,7 @@ public class MazePathFinder {
         out.print("\nShortest paths size : " + getHeightOfShortestPath_HVD(new Point(0, 0), new Point(2, 2), new Path("")));
         
         printLine("Get the height of shortest path in HVD 8 direction with MULTIMOVE along with the trace");
-        out.print("\nShortest paths size : " + getHeightOfShortestPath_8D(new Point(0, 0), new Point(2, 2), new Path(""), 2));
+        out.print("\nShortest paths size : " + getHeightOfShortestPath_8D(new Point(0, 0), new Point(2, 2), 2));
     }
     
     // IN HVD multiMove backward and down allowed
@@ -85,9 +85,9 @@ public class MazePathFinder {
         }
         return true;
     }
-    public static Path getHeightOfShortestPath_8D(Point source, Point destination, Path current, int radius) {
+    public static Path getHeightOfShortestPath_8D(Point source, Point destination, int radius) {
         if(source.equals(destination)) {
-            return new Path(0, current.name);
+            return new Path(0, "");
         }
 
         visited_8d[source.x][source.y] = true;
@@ -96,8 +96,11 @@ public class MazePathFinder {
             for(int j = 1; j <= radius; j++) {
                 Point point = new Point(source.x + (j * directions_8d[i].x), source.y + (j * directions_8d[i].y));
                 if(isValid_8d_shortest(point) && visited_8d[point.x][point.y] != true) {
-                    Path temp_path = getHeightOfShortestPath_8D(point, destination, new Path(current.name + directionNAME_8d[i] + j), radius);
-                    if(temp_path.len > local_path.len) local_path = temp_path;
+                    Path temp_path = getHeightOfShortestPath_8D(point, destination, radius);
+                    if(temp_path.len > local_path.len) {
+                        local_path.len = temp_path.len;
+                        local_path.name = temp_path.name + directionNAME_8d[i] + j;
+                    }
                 }
                  else { // UNDERSTAND THE LOGIC FOR THIS ELSE BLOCK
                     break;
@@ -107,7 +110,7 @@ public class MazePathFinder {
         visited_8d[source.x][source.y] = false;
 
         // if(local_path.len != Integer.MAX_VALUE)
-            local_path.len = local_path.len + 1;
+        local_path.len = local_path.len + 1;
 
         return local_path;
     }
