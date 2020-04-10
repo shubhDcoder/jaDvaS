@@ -1,0 +1,20 @@
+
+============================== : coins problems using include/exclude technique : ==============================
+================================================================================================================
+
+
+======================================== : Combination limited supply : ========================================
+235, 37, 
+number of combinatinos for target 10 and inputs (2, 3, 5, 7) are : 2
+
+======================================= : Combination infinite supply : =======================================
+22222, 2233, 235, 37, 55, 
+number of combinatinos(Infinite supply) for target 10 and inputs (2, 3, 5, 7) are : 5
+
+======================================= : Permutation infinite supply : =======================================
+22222, 2233, 2323, 2332, 235, 253, 3223, 3232, 325, 3322, 352, 37, 523, 532, 55, 73, 
+number of permutations(Infinite supply) for target 10 and inputs (2, 3, 5, 7) are : 16
+
+======================================== : Permutation limited supply : ========================================
+235, 253, 325, 352, 37, 523, 532, 73, 
+number of permutation (Limited supply) for target 10 and inputs (2, 3, 5, 7) are : 8
