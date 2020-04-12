@@ -9,6 +9,77 @@ public class BitManipulation {
         printLine("flipping bits");
         syso("result => " + flippingBits(802743475l));
         
+        printLine("XOR sequence");
+        syso("result => " + xorSequence(3, 5));
+        syso("result => " + xorSequence(4, 6));
+        syso("result => " + xorSequence(15, 20));
+
+        printLine("counter game");
+        syso("result => " + counterGame(6l  ));
+
+        printLine("the Great XOR");
+        syso("result => " + theGreatXor(10000000000l));
+    }
+
+    public static long theGreatXor(long x) {
+        long answer = 0;
+
+        // runs at most 63 times for unsigned int
+        for(long i = 0; i < Long.SIZE; i++) {
+            if((x & 1) == 0) answer = (answer | (1l << i));
+            x = (x >> 1);
+            if(x == 0) break;
+        }
+
+        return answer;
+    }
+
+    public static String counterGame(long n) {
+        n = n - 1;
+        int count = 0;
+        while(n != 0) {
+            n = (n & (n - 1));
+            count++;
+        }
+        return ((count & 1) == 1) ? "Louise" : "Richard";
+    }
+
+    public static long xorSequence(long left, long right) {
+        long answer = 0;
+
+        int left_r = (int)(left % 4l);
+        long l_block_start = left + (4 - left_r);
+        int right_R = (int)(right % 4l);
+        long r_block_end = right - right_R;
+
+        long no_of_blocks = (r_block_end - l_block_start) / 4l;
+        if((no_of_blocks % 2) != 0) answer ^= 2;
+
+        for(long i = left; i < l_block_start; i++) {
+            long remainder = (i % 4l);
+            if(remainder == 0) answer ^= i;
+            else if(remainder == 1) answer ^= 1;
+            else if(remainder == 2) answer ^= (i + 1);
+        }
+
+        for(long i = right; i >= r_block_end; i--) {
+            long remainder = (i % 4l);
+            if(remainder == 0) answer ^= i;
+            else if(remainder == 1) answer ^= 1;
+            else if(remainder == 2) answer ^= (i + 1);
+        }
+        return answer;
+    }
+
+    public static long getLess2power(long number) {
+        number |= (number >> 1);
+        number |= (number >> 2);
+        number |= (number >> 4);
+        number |= (number >> 16);
+        number |= (number >> 32);
+
+        number += 1;
+        return number >>> 1;
     }
 
     public static long flippingBits(long n) {
