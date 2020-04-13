@@ -2,81 +2,44 @@
 =================================== : N Queen problem -- start with basics : ===================================
 ================================================================================================================
 
-======================= : place N queens in a single dimensional array -- combination : =======================
-Q0B0 Q1B1 Q2B2 , 
-Q0B0 Q1B1 Q2B3 , 
-Q0B0 Q1B1 Q2B4 , 
-Q0B0 Q1B2 Q2B3 , 
-Q0B0 Q1B2 Q2B4 , 
-Q0B0 Q1B3 Q2B4 , 
-Q0B1 Q1B2 Q2B3 , 
-Q0B1 Q1B2 Q2B4 , 
-Q0B1 Q1B3 Q2B4 , 
-Q0B2 Q1B3 Q2B4 , 
+================================================================================================================
+for one dimensional array == >
+================================================================================================================
 
-number of ways N queens can be placed in a single dimensional array without arranging are : 10
 
-======================= : place N queens in a single dimensional array -- permutaiton : =======================
-Q0B0 Q1B1 Q2B2 , 
-Q0B0 Q1B1 Q2B3 , 
-Q0B0 Q1B1 Q2B4 , 
-Q0B0 Q1B2 Q2B1 , 
-Q0B0 Q1B2 Q2B3 , 
-Q0B0 Q1B2 Q2B4 , 
-Q0B0 Q1B3 Q2B1 , 
-Q0B0 Q1B3 Q2B2 , 
-Q0B0 Q1B3 Q2B4 , 
-Q0B0 Q1B4 Q2B1 , 
-Q0B0 Q1B4 Q2B2 , 
-Q0B0 Q1B4 Q2B3 , 
-Q0B1 Q1B0 Q2B2 , 
-Q0B1 Q1B0 Q2B3 , 
-Q0B1 Q1B0 Q2B4 , 
-Q0B1 Q1B2 Q2B0 , 
-Q0B1 Q1B2 Q2B3 , 
-Q0B1 Q1B2 Q2B4 , 
-Q0B1 Q1B3 Q2B0 , 
-Q0B1 Q1B3 Q2B2 , 
-Q0B1 Q1B3 Q2B4 , 
-Q0B1 Q1B4 Q2B0 , 
-Q0B1 Q1B4 Q2B2 , 
-Q0B1 Q1B4 Q2B3 , 
-Q0B2 Q1B0 Q2B1 , 
-Q0B2 Q1B0 Q2B3 , 
-Q0B2 Q1B0 Q2B4 , 
-Q0B2 Q1B1 Q2B0 , 
-Q0B2 Q1B1 Q2B3 , 
-Q0B2 Q1B1 Q2B4 , 
-Q0B2 Q1B3 Q2B0 , 
-Q0B2 Q1B3 Q2B1 , 
-Q0B2 Q1B3 Q2B4 , 
-Q0B2 Q1B4 Q2B0 , 
-Q0B2 Q1B4 Q2B1 , 
-Q0B2 Q1B4 Q2B3 , 
-Q0B3 Q1B0 Q2B1 , 
-Q0B3 Q1B0 Q2B2 , 
-Q0B3 Q1B0 Q2B4 , 
-Q0B3 Q1B1 Q2B0 , 
-Q0B3 Q1B1 Q2B2 , 
-Q0B3 Q1B1 Q2B4 , 
-Q0B3 Q1B2 Q2B0 , 
-Q0B3 Q1B2 Q2B1 , 
-Q0B3 Q1B2 Q2B4 , 
-Q0B3 Q1B4 Q2B0 , 
-Q0B3 Q1B4 Q2B1 , 
-Q0B3 Q1B4 Q2B2 , 
-Q0B4 Q1B0 Q2B1 , 
-Q0B4 Q1B0 Q2B2 , 
-Q0B4 Q1B0 Q2B3 , 
-Q0B4 Q1B1 Q2B0 , 
-Q0B4 Q1B1 Q2B2 , 
-Q0B4 Q1B1 Q2B3 , 
-Q0B4 Q1B2 Q2B0 , 
-Q0B4 Q1B2 Q2B1 , 
-Q0B4 Q1B2 Q2B3 , 
-Q0B4 Q1B3 Q2B0 , 
-Q0B4 Q1B3 Q2B1 , 
-Q0B4 Q1B3 Q2B2 , 
+================== : place N queens in a single dimensional array -- combination 0/1 METHOD : ==================
 
-number of ways N queens can be placed in a single dimensional array with arrangements are : 60
-216
+number of ways N queens can be placed in a single dimensional array without arranging are : 1820
+
+================== : place N queens in a single dimensional array -- permutaiton 0/1 METHOD : ==================
+
+number of ways N queens can be placed in a single dimensional array with arrangements are : 43680
+
+================ : place N queens in a single dimensional array -- COMBINATION - LOOP METHOD : ================
+
+number of ways N queens can be placed in 1d array without arrangements are : 1820
+
+================ : place N queens in a single dimensional array -- PERMUTATION - LOOP METHOD : ================
+
+number of ways N queens can be placed in 1d array WITH arrangements are : 43680
+
+================================================================================================================
+for two dimensional array == >
+================================================================================================================
+
+
+========================= : place N queens in a 2d array - COMBINATION - LOOP METHOD : =========================
+
+number of ways N queens can be placed in 2d array without arrangement are : 1820
+
+========================= : place N queens in a 2d array - Permutation - LOOP METHOD : =========================
+
+number of ways N queens can be placed in 2d array with arrangements are : 43680
+
+========================= : place N queens in a 2d array - COMBINATION - 0/1 METHOD : =========================
+
+number of ways N queens can be placed in 2d array without arrangements are : 1820
+
+========================= : place N queens in a 2d array - PERMUTATION - 0/1 METHOD : =========================
+
+number of ways N queens can be placed in 2d array with arrangements are : 43680
