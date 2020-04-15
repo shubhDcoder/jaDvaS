@@ -4,6 +4,7 @@ public class Nqueen {
     public static final int BOARD_ROW_SIZE = 4;
     public static final int BOARD_COL_SIZE = 4;
     public static final int BOARD_2D_SIZE = BOARD_COL_SIZE * BOARD_ROW_SIZE;
+    public static final boolean[][] VISITED_2D = new boolean[BOARD_ROW_SIZE][BOARD_COL_SIZE];
     public static void main(String args[]) {
         printLine("N Queen problem -- start with basics");
         printLine();
@@ -38,7 +39,93 @@ public class Nqueen {
         printLine("place N queens in a 2d array - PERMUTATION - 0/1 METHOD");
         syso("\nnumber of ways N queens can be placed in 2d array with arrangements are : " + placeQueen_permutation_2d_02(4, 0, "", 0));
 
+        printLine("place N queens in a 2d array - where no queen intersect each other WITH DIRECTION VECTOR");
+        syso("\nnumber of ways N queens can be placed in 2d array such that no queen can kill each other are " + placeQueen_combination_2d_01_basic(0, 4, 0, ""));
+
+
+        printLine("place N queens in a 2d array - where no queen intersect each other with o(1) complexity");
+        syso("\nnumber of ways N queens can be placed in 2d array such that no queen can kill each other are " + placeQueen_combination_2d_01_adv(0, 4, 0, ""));
         // syso(countCalls);
+    }
+
+    public static boolean[] rowVisited = new boolean[BOARD_ROW_SIZE];
+    public static boolean[] colVisited = new boolean[BOARD_COL_SIZE];
+    public static boolean[] digVisitedF = new boolean[BOARD_ROW_SIZE + BOARD_COL_SIZE - 1];
+    public static boolean[] digVisitedB = new boolean[BOARD_ROW_SIZE + BOARD_COL_SIZE - 1];
+
+    public static boolean placeQueen_combination_2d_01_adv_isValid(int index) {
+        int r = index / BOARD_COL_SIZE;
+        int c = index % BOARD_COL_SIZE;
+
+        if(rowVisited[r] || colVisited[c] || digVisitedF[r + c] || digVisitedB[r - c + BOARD_COL_SIZE - 1]) return false;
+
+        return true;
+    }
+    public static int placeQueen_combination_2d_01_adv(int placed, int totalQueen, int index, String answer) {
+        if(totalQueen == placed) {
+            syso(answer);
+            return 1;
+        }
+
+        int count = 0;
+        if((totalQueen - placed) <= (BOARD_2D_SIZE - index)) {
+            for(int i = index; i < BOARD_2D_SIZE; i++) {
+                if(placeQueen_combination_2d_01_adv_isValid(i)) {
+                    int r = i / BOARD_COL_SIZE;
+                    int c = i % BOARD_COL_SIZE;
+
+                    rowVisited[r] = true;
+                    colVisited[c] = true;
+                    digVisitedF[r + c] = true;
+                    digVisitedB[r - c + BOARD_COL_SIZE - 1] = true;
+                    count += placeQueen_combination_2d_01_adv(placed + 1, totalQueen, i + 1, answer + "Q" + placed + "(" + r + " " + c + ") ");
+                    rowVisited[r] = false;
+                    colVisited[c] = false;
+                    digVisitedF[r + c] = false;
+                    digVisitedB[r - c + BOARD_COL_SIZE - 1] = false;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    public static int[][] directions = {{0, -1}, {-1, 0}, {-1, -1}, {-1, 1}};
+    public static boolean placeQueen_combination_2d_01_basic_isValid(int index) {
+        int row = index / BOARD_COL_SIZE;
+        int col = index % BOARD_COL_SIZE;
+        for(int[] dir : directions) {
+            for(int i = 0; i < BOARD_COL_SIZE; i++) {
+                int r = row + (i * dir[0]);
+                int c = col + (i * dir[1]);
+                if(r >= 0 && c >= 0 && r < BOARD_ROW_SIZE && c < BOARD_COL_SIZE) {
+                    if(VISITED_2D[r][c]) return false;
+                }
+                else break;
+            }
+        }
+        return true;
+    }
+
+    public static int placeQueen_combination_2d_01_basic(int placed, int totalQueen, int index, String answer) {
+        if(totalQueen == placed) {
+            syso(answer);
+            return 1;
+        }
+
+        int count = 0;
+        if((totalQueen - placed) <= (BOARD_2D_SIZE - index)) {
+            for(int i = index; i < BOARD_2D_SIZE; i++) {
+                if(placeQueen_combination_2d_01_basic_isValid(i)) {
+                    int x = i / BOARD_COL_SIZE;
+                    int y = i % BOARD_COL_SIZE;
+                    VISITED_2D[x][y] = true;
+                    count += placeQueen_combination_2d_01_basic(placed + 1, totalQueen, i + 1, answer + "Q" + placed + "(" + x + " " + y + ") ");
+                    VISITED_2D[x][y] = false;
+                }
+            }
+        }
+        return count;
     }
 
     public static boolean[] permutation_2d_02 = new boolean[BOARD_2D_SIZE];
@@ -72,8 +159,8 @@ public class Nqueen {
         if((totalQueen - placed) > (BOARD_2D_SIZE - index)) return 0;
 
         int count = 0;
-        int x = index / 2;
-        int y = index % 2;
+        int x = index / BOARD_COL_SIZE;
+        int y = index % BOARD_COL_SIZE;
         count += placeQueen_combination_2d_02(totalQueen, placed + 1, answer + "Q" + placed + "(" + x + " " + y + ") ", index + 1);
         count += placeQueen_combination_2d_02(totalQueen, placed, answer, index + 1);
 
@@ -91,7 +178,7 @@ public class Nqueen {
         for(int i = 0; i < BOARD_2D_SIZE; i++) {
             if(permutation_2d_01[i] == false) {
                 int x = i / BOARD_ROW_SIZE;
-                int y = i / BOARD_ROW_SIZE;
+                int y = i % BOARD_COL_SIZE;
                 permutation_2d_01[i] = true;
                 count += placeQueen_permutation_2d_01(totalQueen, placed + 1, answer + "Q" + placed + "(" + x + " " + y + ") ");
                 permutation_2d_01[i] = false;
@@ -107,13 +194,13 @@ public class Nqueen {
             return 1;
         }
 
-        if(index == BOARD_2D_SIZE) return 0;
+        // if(index == BOARD_2D_SIZE) return 0;
 
         int count = 0;
         for(int i = index; i < BOARD_2D_SIZE; i++) {
             if((totalQueen - placed) <= (BOARD_2D_SIZE - index)) {
-                int x = i / BOARD_ROW_SIZE;
-                int y = i % BOARD_ROW_SIZE;
+                int x = i / BOARD_COL_SIZE;
+                int y = i % BOARD_COL_SIZE;
                 count += placeQueen_combination_2d_01(totalQueen, i + 1, placed + 1, answer + "Q" + placed + "(" + x + " "  + y + ") ");
             }
         }
@@ -210,15 +297,15 @@ public class Nqueen {
     // random utility methods
     public static final int FIXED_LEN = 106;
     public static void printLine() {
-        System.out.println(String.format("%112s", " ").replaceAll(" ", "="));
+        System.out.println(String.format("%112s", " ").replaceAll(" ", "*"));
     }
 
     public static void printLine(String word) {
         printNewLine();
         int write = word.length();
         int fill = (FIXED_LEN - write) / 2;
-        System.out.println(String.format("%" + fill + "s", " ").replaceAll(" ", "=") + " : " + word + " : "
-                + String.format(String.format("%" + fill + "s", " ")).replaceAll(" ", "="));
+        System.out.println(String.format("%" + fill + "s", " ").replaceAll(" ", "*") + " : " + word + " : "
+                + String.format(String.format("%" + fill + "s", " ")).replaceAll(" ", "*"));
     }
 
     public static void printNewLine() {

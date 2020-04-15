@@ -1,45 +1,57 @@
 
-=================================== : N Queen problem -- start with basics : ===================================
-================================================================================================================
+*********************************** : N Queen problem -- start with basics : ***********************************
+****************************************************************************************************************
 
-================================================================================================================
+****************************************************************************************************************
 for one dimensional array == >
-================================================================================================================
+****************************************************************************************************************
 
 
-================== : place N queens in a single dimensional array -- combination 0/1 METHOD : ==================
+****************** : place N queens in a single dimensional array -- combination 0/1 METHOD : ******************
 
 number of ways N queens can be placed in a single dimensional array without arranging are : 1820
 
-================== : place N queens in a single dimensional array -- permutaiton 0/1 METHOD : ==================
+****************** : place N queens in a single dimensional array -- permutaiton 0/1 METHOD : ******************
 
 number of ways N queens can be placed in a single dimensional array with arrangements are : 43680
 
-================ : place N queens in a single dimensional array -- COMBINATION - LOOP METHOD : ================
+**************** : place N queens in a single dimensional array -- COMBINATION - LOOP METHOD : ****************
 
 number of ways N queens can be placed in 1d array without arrangements are : 1820
 
-================ : place N queens in a single dimensional array -- PERMUTATION - LOOP METHOD : ================
+**************** : place N queens in a single dimensional array -- PERMUTATION - LOOP METHOD : ****************
 
 number of ways N queens can be placed in 1d array WITH arrangements are : 43680
 
-================================================================================================================
+****************************************************************************************************************
 for two dimensional array == >
-================================================================================================================
+****************************************************************************************************************
 
 
-========================= : place N queens in a 2d array - COMBINATION - LOOP METHOD : =========================
+************************* : place N queens in a 2d array - COMBINATION - LOOP METHOD : *************************
 
 number of ways N queens can be placed in 2d array without arrangement are : 1820
 
-========================= : place N queens in a 2d array - Permutation - LOOP METHOD : =========================
+************************* : place N queens in a 2d array - Permutation - LOOP METHOD : *************************
 
 number of ways N queens can be placed in 2d array with arrangements are : 43680
 
-========================= : place N queens in a 2d array - COMBINATION - 0/1 METHOD : =========================
+************************* : place N queens in a 2d array - COMBINATION - 0/1 METHOD : *************************
 
 number of ways N queens can be placed in 2d array without arrangements are : 1820
 
-========================= : place N queens in a 2d array - PERMUTATION - 0/1 METHOD : =========================
+************************* : place N queens in a 2d array - PERMUTATION - 0/1 METHOD : *************************
 
 number of ways N queens can be placed in 2d array with arrangements are : 43680
+
+********* : place N queens in a 2d array - where no queen intersect each other WITH DIRECTION VECTOR : *********
+Q0(0 1) Q1(1 3) Q2(2 0) Q3(3 2) 
+Q0(0 2) Q1(1 0) Q2(2 3) Q3(3 1) 
+
+number of ways N queens can be placed in 2d array such that no queen can kill each other are 2
+
+********* : place N queens in a 2d array - where no queen intersect each other with o(1) complexity : *********
+Q0(0 1) Q1(1 3) Q2(2 0) Q3(3 2) 
+Q0(0 2) Q1(1 0) Q2(2 3) Q3(3 1) 
+
+number of ways N queens can be placed in 2d array such that no queen can kill each other are 2
