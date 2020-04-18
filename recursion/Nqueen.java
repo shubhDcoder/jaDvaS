@@ -14,39 +14,212 @@ public class Nqueen {
         int[] array = new int[BOARD_SIZE];
         int[][] array_2d = new int[BOARD_ROW_SIZE][BOARD_COL_SIZE];
         printLine("place N queens in a single dimensional array -- combination 0/1 METHOD");
-        syso("\nnumber of ways N queens can be placed in a single dimensional array without arranging are : " + placeQueen_combination_01(array, 0, 4, 0, ""));
+        syso("\nresult without arranging are : " + placeQueen_combination_01(array, 0, 4, 0, ""));
         
         printLine("place N queens in a single dimensional array -- permutaiton 0/1 METHOD");
-        syso("\nnumber of ways N queens can be placed in a single dimensional array with arrangements are : " + placeQueen_permutation_01(array, 0, 4, 0, ""));
+        syso("\nresult with arrangements are : " + placeQueen_permutation_01(array, 0, 4, 0, ""));
         
         printLine("place N queens in a single dimensional array -- COMBINATION - LOOP METHOD");
-        syso("\nnumber of ways N queens can be placed in 1d array without arrangements are : " + placeQueen_combination_02(array, 0, 4, 0, ""));
+        syso("\nnresult without arrangements are : " + placeQueen_combination_02(array, 0, 4, 0, ""));
         
         printLine("place N queens in a single dimensional array -- PERMUTATION - LOOP METHOD");
-        syso("\nnumber of ways N queens can be placed in 1d array WITH arrangements are : " + placeQueen_permutation_02(array, 0, 4, ""));
+        syso("\nresult WITH arrangements are : " + placeQueen_permutation_02(array, 0, 4, ""));
 
         markHeading("for two dimensional array == >");
 
         printLine("place N queens in a 2d array - COMBINATION - LOOP METHOD");
-        syso("\nnumber of ways N queens can be placed in 2d array without arrangement are : " + placeQueen_combination_2d_01(4, 0, 0, ""));
+        syso("\nresult without arrangement are : " + placeQueen_combination_2d_01(4, 0, 0, ""));
 
         printLine("place N queens in a 2d array - Permutation - LOOP METHOD");
-        syso("\nnumber of ways N queens can be placed in 2d array with arrangements are : " + placeQueen_permutation_2d_01(4, 0, ""));
+        syso("\nresult with arrangements are : " + placeQueen_permutation_2d_01(4, 0, ""));
 
         printLine("place N queens in a 2d array - COMBINATION - 0/1 METHOD");
-        syso("\nnumber of ways N queens can be placed in 2d array without arrangements are : " + placeQueen_combination_2d_02(4, 0, "", 0));
+        syso("\nresult without arrangements are : " + placeQueen_combination_2d_02(4, 0, "", 0));
 
         printLine("place N queens in a 2d array - PERMUTATION - 0/1 METHOD");
-        syso("\nnumber of ways N queens can be placed in 2d array with arrangements are : " + placeQueen_permutation_2d_02(4, 0, "", 0));
+        syso("\nresult with arrangements are : " + placeQueen_permutation_2d_02(4, 0, "", 0));
 
         printLine("place N queens in a 2d array - where no queen intersect each other WITH DIRECTION VECTOR");
-        syso("\nnumber of ways N queens can be placed in 2d array such that no queen can kill each other are " + placeQueen_combination_2d_01_basic(0, 4, 0, ""));
-
+        syso("\nresult using direction vector other are " + placeQueen_combination_2d_01_basic(0, 4, 0, ""));
 
         printLine("place N queens in a 2d array - where no queen intersect each other with o(1) complexity");
-        syso("\nnumber of ways N queens can be placed in 2d array such that no queen can kill each other are " + placeQueen_combination_2d_01_adv(0, 4, 0, ""));
+        syso("\nresult using four boolean arrays other are " + placeQueen_combination_2d_01_adv(0, 4, 0, ""));
+
+        printLine("place N queens in a 2d array - where no queen intersect each other with o(1) complexity USING BITS");
+        syso("\nresult using bits are : " + placeQueen_combination_2d_01_adv_usingBits(0, 0, ""));
+        resetBitMarker();
+
+        countCalls = 0;
+        printLine("place N queens in 2d array where no queen intersect each other with o(1) using bits & 0/1 method");
+        syso("\nCombination : result using bits and 0/1 method are : " + placeQueen_combination_2d_02_adv_usingBits(0, 0, ""));
+        syso("total calls are : " + countCalls);
+
+        printLine("place N queens in 2d array where no queen intersect each other with o(1) using bits & 0/1 method");
+        syso("\nPermutation : result using bits and 0/1 method are : " + placeQueen_permutation_2d_02_adv_usingBits(0, 0, ""));
+        resetBitMarker();
+
+        countCalls = 0;
+        printLine("place N queens in 2d array where no queen intersect each other with o(1) using bits & 0/1 method Best Complexity(COl power queen)");
+        syso("\nMOST OPTIMIZED WAY .. count is : " + placeQueen_combination_2d_01_adv_usingBits_final(0, 0, ""));
+        syso("total calls are : " + countCalls);
         // syso(countCalls);
     }
+
+    public static int rowVisitedBit = 0;
+    public static int colVisitedBit = 0;
+    public static int diagVisitedBit = 0;
+    public static int aDiagvisitedBit = 0;
+    public static int totalQueensForBit = 4;
+    public static int countCalls = 0;
+
+    public static void resetBitMarker() {
+        int rowVisitedBit = 0;
+        int colVisitedBit = 0;
+        int diagVisitedBit = 0;
+        int aDiagvisitedBit = 0;
+    }
+
+    public static int placeQueen_combination_2d_01_adv_usingBits_final(int row, int placed, String answer) {
+        if(placed == totalQueensForBit) {
+            syso(answer);
+            return 1;
+        }
+
+        if(row == BOARD_ROW_SIZE) return 0;
+
+        int count = 0;
+        countCalls++;
+        for(int col = 0; col < BOARD_COL_SIZE; col++) {
+            int maskR = (1 << col);
+            int maskC = (1 << row);
+            int maskD = (1 << (row + col));
+            int maskAD = (1 << (row - col + BOARD_COL_SIZE - 1));
+
+            if((maskR & colVisitedBit) == 0 && (maskC & rowVisitedBit) == 0 && (maskD & diagVisitedBit) == 0 && (maskAD & aDiagvisitedBit) == 0) {
+                rowVisitedBit ^= maskC;
+                colVisitedBit ^= maskR;
+                diagVisitedBit ^= maskD;
+                aDiagvisitedBit ^= maskAD;
+
+                count += placeQueen_combination_2d_01_adv_usingBits_final(row + 1, placed + 1, answer + "Q" + placed + "(" + row + " " + col + ") ");
+
+                rowVisitedBit ^= maskC;
+                colVisitedBit ^= maskR;
+                diagVisitedBit ^= maskD;
+                aDiagvisitedBit ^= maskAD;
+            }
+        }
+
+        return count;
+    }
+
+    public static int placeQueen_permutation_2d_02_adv_usingBits(int index, int placed, String answer) {
+        if(placed == totalQueensForBit) {
+            // syso(answer);
+            return 1;
+        }
+
+        if(index == BOARD_2D_SIZE) return 0;
+
+        int row = index / BOARD_COL_SIZE;
+        int col = index % BOARD_COL_SIZE;
+        int maskR = (1 << col);
+        int maskC = (1 << row);
+        int maskD = (1 << (row + col));
+        int maskAD = (1 << (row - col + BOARD_COL_SIZE - 1));
+
+        int count = 0;
+        if((maskR & colVisitedBit) == 0 && (maskC & rowVisitedBit) == 0 && (maskD & diagVisitedBit) == 0 && (maskAD & aDiagvisitedBit) == 0) {
+            rowVisitedBit ^= maskC;
+            colVisitedBit ^= maskR;
+            diagVisitedBit ^= maskD;
+            aDiagvisitedBit ^= maskAD;
+
+            count += placeQueen_permutation_2d_02_adv_usingBits(0, placed + 1, answer + "Q" + placed + "(" + row + " " + col + ") ");
+
+            rowVisitedBit ^= maskC;
+            colVisitedBit ^= maskR;
+            diagVisitedBit ^= maskD;
+            aDiagvisitedBit ^= maskAD;
+        }
+
+        count += placeQueen_permutation_2d_02_adv_usingBits(index + 1, placed, answer);
+
+        return count;
+    }
+
+    public static int placeQueen_combination_2d_02_adv_usingBits(int index, int placed, String answer) {
+        if(totalQueensForBit == placed) {
+            syso(answer);
+            return 1;
+        }
+
+        if(index == BOARD_SIZE) {
+            return 0;
+        }
+
+        int count = 0;
+        countCalls++;
+        if((totalQueensForBit - placed) <= (BOARD_2D_SIZE - index)) {
+            int row = index / BOARD_COL_SIZE;
+            int col = index % BOARD_COL_SIZE;
+
+            int maskR = (1 << col);
+            int maskC = (1 << row);
+            int maskD = (1 << (row + col));
+            int maskAD = (1 << (row - col + BOARD_SIZE - 1));
+
+            if((maskR & colVisitedBit) == 0 && (maskC & rowVisitedBit) == 0 && (maskD & diagVisitedBit) == 0 && (maskAD & aDiagvisitedBit) == 0) {
+                colVisitedBit ^= maskR;
+                rowVisitedBit ^= maskC;
+                diagVisitedBit ^= maskD;
+                aDiagvisitedBit ^= maskAD;
+
+                count += placeQueen_combination_2d_02_adv_usingBits(index + 1, placed + 1, answer + "Q" + placed + "(" + row + " " + col + ") ");
+
+                colVisitedBit ^= maskR;
+                rowVisitedBit ^= maskC;
+                diagVisitedBit ^= maskD;
+                aDiagvisitedBit ^= maskAD;
+            }
+
+            count += placeQueen_combination_2d_02_adv_usingBits(index + 1, placed, answer);
+        }
+        return count;
+    }
+
+    public static int placeQueen_combination_2d_01_adv_usingBits(int index, int placed, String answer) {
+        if(placed == totalQueensForBit) {
+            syso(answer);
+            return 1;
+        }
+
+        int count = 0;
+        for(int i = index; i < BOARD_2D_SIZE; i++) {
+            int row = i / BOARD_COL_SIZE;
+            int col = i % BOARD_COL_SIZE;
+            
+            int maskR = (1 << col);
+            int maskC = (1 << row);
+            int maskD = (1 << (row + col));
+            int maskAD = (1 << (row - col + BOARD_COL_SIZE - 1));
+
+            if((maskR & colVisitedBit) == 0 && (maskC & rowVisitedBit) == 0 && (maskD & diagVisitedBit) == 0 && (maskAD & aDiagvisitedBit) == 0) {
+                rowVisitedBit ^= maskC;
+                colVisitedBit ^= maskR;
+                diagVisitedBit ^= maskD;
+                aDiagvisitedBit ^= maskAD;
+                count += placeQueen_combination_2d_01_adv_usingBits(i + 1, placed + 1, answer + "Q" + placed + "(" + row + " " + col + ") ");
+                rowVisitedBit ^= maskC;
+                colVisitedBit ^= maskR;
+                diagVisitedBit ^= maskD;
+                aDiagvisitedBit ^= maskAD;
+            }
+        }
+
+        return count;
+    }
+
 
     public static boolean[] rowVisited = new boolean[BOARD_ROW_SIZE];
     public static boolean[] colVisited = new boolean[BOARD_COL_SIZE];
@@ -234,9 +407,9 @@ public class Nqueen {
             return 1;
         }
 
-        if(index == array.length) {
-            return 0;
-        }
+        // if(index == array.length) {
+        //     return 0;
+        // }
 
         int count = 0;
         if((totalQueen - placed) <= (array.length - index)) {
@@ -271,7 +444,6 @@ public class Nqueen {
         return count;
     }
 
-    public static int countCalls = 0;
     public static int placeQueen_combination_01(int[] array, int placed, int totalQueen, int index, String answer) {
         // countCalls++;
         if(placed == totalQueen) {
@@ -279,9 +451,9 @@ public class Nqueen {
             return 1;
         }
 
-        if(index == array.length) {
-            return 0;
-        }
+        // if(index == array.length) {
+        //     return 0;
+        // }
 
         int count = 0;
         if(((totalQueen - placed) <= (array.length - index))) {
@@ -295,9 +467,9 @@ public class Nqueen {
     }
 
     // random utility methods
-    public static final int FIXED_LEN = 106;
+    public static final int FIXED_LEN = 135;
     public static void printLine() {
-        System.out.println(String.format("%112s", " ").replaceAll(" ", "*"));
+        System.out.println(String.format("%140s", " ").replaceAll(" ", "*"));
     }
 
     public static void printLine(String word) {
