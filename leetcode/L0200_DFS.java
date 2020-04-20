@@ -1,4 +1,4 @@
-public class ConnectedIsland_200 {
+public class L0200_DFS {
 
     public static char[][] grid = {{'1', '1', '1'}, {'0', '1', '0'}, {'1', '1', '1'}};
 
