@@ -123,13 +123,14 @@ public class TopologicalSort extends Graph implements PrintUtil {
         }
     }
 
+    static List<Integer> ts_answer = new ArrayList<>();
     public static void topologicalSort_start() {
         for(int i = 0; i < totalNodes; i++) {
             if(mark[i] == false) {
                 callDfs(i);
             }
         }
-        PrintUtil.syso(answer);
+        PrintUtil.syso(ts_answer);
     }
 
     public static void callDfs(int src) {
@@ -140,6 +141,6 @@ public class TopologicalSort extends Graph implements PrintUtil {
                 callDfs(adj);
         }
 
-        answer.add(src);
+        ts_answer.add(src);
     }
 }
