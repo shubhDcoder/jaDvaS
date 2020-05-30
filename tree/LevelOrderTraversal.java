@@ -120,12 +120,10 @@ public class LevelOrderTraversal {
     parent.offer(root);
     parent.offer(null);
 
-    int level = 0;
     while (parent.size() > 1) {
       TreeNode popped = parent.poll();
 
       if (popped == null) {
-        level++;
         System.out.println();
         parent.offer(null);
         continue;
