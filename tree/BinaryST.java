@@ -128,7 +128,7 @@ public class BinaryST {
 
     successor = tempRight == null ? successor : tempRight;
 
-    System.out.println("Successor of " + key + " is > " + successor);
+    syso("Successor of " + key + " is > " + successor);
 
     TreeNode tempLeft = root.left;
     while (tempLeft != null)
@@ -137,7 +137,7 @@ public class BinaryST {
 
     predecessor = tempLeft == null ? predecessor : tempLeft;
 
-    System.out.println("Predecessor of " + key + " is > " + predecessor);
+    syso("Predecessor of " + key + " is > " + predecessor);
   }
 
   // CONSTRUCT BST FROM PREORDER TRAVERSAL ARRAY
@@ -161,15 +161,30 @@ public class BinaryST {
     return root;
   }
 
+  static int preIndex1 = 0;
+
   public static TreeNode constructTreeFromPreOrder_v2(int[] input, int min, int max) {
-    if (preIndex == input.length || input[preIndex] < min || input[preIndex] > max) return null;
-    TreeNode root = new TreeNode(input[preIndex++]);
-    if (preIndex < input.length) root.left = constructTreeFromPreOrder_v2(input, min, root.data);
-    if (preIndex < input.length) root.right = constructTreeFromPreOrder_v2(input, root.data, max);
+    if (preIndex1 == input.length || input[preIndex1] < min || input[preIndex1] > max) return null;
+    TreeNode root = new TreeNode(input[preIndex1++]);
+    if (preIndex1 < input.length) root.left = constructTreeFromPreOrder_v2(input, min, root.data);
+    if (preIndex1 < input.length) root.right = constructTreeFromPreOrder_v2(input, root.data, max);
     return root;
   }
 
   // GET HEIGHT OF BINARY SEARCH TREE WITHOUT CREATING BST
+
+  static int heightIndex = 0;
+
+  public static int getHeightWithoutCreating(int[] input, int min, int max) {
+    if (heightIndex == input.length || input[heightIndex] < min || input[heightIndex] > max)
+      return -1;
+    int leftHeight = -1;
+    int rightHeight = -1;
+    int me = input[heightIndex++];
+    if (heightIndex < input.length) leftHeight = getHeightWithoutCreating(input, min, me);
+    if (heightIndex < input.length) rightHeight = getHeightWithoutCreating(input, me, max);
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
 
   // ADD NODE IN BST
 
@@ -230,33 +245,73 @@ public class BinaryST {
   public static void main(String args[]) {
     int[] tree = {5, 15, 20, 25, 30, 35, 40, 50, 55, 60, 65, 75, 80, 85, 90};
     TreeNode root = constructTree(tree, 0, tree.length - 1);
-    System.out.println("tree looks like ------------");
-    // display(root);
-    // System.out.println();
-    System.out.println("height of tree > " + getHeight(root));
-    System.out.println("size of tree > " + getSize(root));
-    System.out.println("max of tree > " + maxElement(root));
-    System.out.println("min of tree > " + minElement(root));
-    System.out.println("elements within range (30, 90) are > ");
-    printElementsInRange(root, 40, 70);
-    System.out.println();
-    System.out.println("LCA of 20, 35 is > " + findLCA(root, 20, 35));
-    System.out.println("inOrderTraversal is sorted > ");
+    markHeading("Binary Search tree");
+    printLine("tree looks like");
+    display(root);
+    printLine("Different functinos of tree");
+    syso("height of tree > " + getHeight(root));
+    syso("size of tree > " + getSize(root));
+    syso("max of tree > " + maxElement(root));
+    syso("min of tree > " + minElement(root));
+    printLine("elements within range (30, 90) are");
+    printElementsInRange(root, 30, 90);
+    printNewLine();
+    printLine("LCA");
+    syso("LCA of 20, 35 is > " + findLCA(root, 20, 35));
+    printLine("inOrderTraversal is sorted > ");
     inOrderTraversal(root);
-    System.out.println();
     TreeNode node55 = find(root, 55);
     TreeNode node54 = new TreeNode(54);
     TreeNode node53 = new TreeNode(53);
     node55.left = node54;
     node54.left = node53;
+    printLine("INorder Successor and predecessor are ");
     inOrderSuccessorAndPredecessor(root, 55);
-
+    printNewLine();
     int[] preOrderArray = {50, 17, 9, 14, 12, 23, 19, 76, 54, 72, 67};
     // TreeNode preRoot = constructTreeFromPreOrder(preOrderArray, MIN_V, MAX_V);
     TreeNode preRoot = constructTreeFromPreOrder_v2(preOrderArray, MIN_V, MAX_V);
     addNode(preRoot, 20);
     addNode(preRoot, 55);
     addNode(preRoot, 25);
+    printLine("construct BST from preOrderTraversal array tree looks like");
     display(preRoot);
+    printLine("get height without constructing tree");
+    syso("height is " + getHeightWithoutCreating(preOrderArray, MIN_V, MAX_V));
+  }
+
+  // random utility methods
+  public static final int FIXED_LEN = 135;
+
+  public static void printLine() {
+    System.out.println(String.format("%140s", " ").replaceAll(" ", "*"));
+  }
+
+  public static void printLine(String word) {
+    printNewLine();
+    int write = word.length();
+    int fill = (FIXED_LEN - write) / 2;
+    System.out.println(
+        String.format("%" + fill + "s", " ").replaceAll(" ", "*")
+            + " : "
+            + word
+            + " : "
+            + String.format(String.format("%" + fill + "s", " ")).replaceAll(" ", "*"));
+  }
+
+  public static void printNewLine() {
+    System.out.println();
+  }
+
+  public static void syso(Object obj) {
+    System.out.println(obj);
+  }
+
+  public static void markHeading(String string) {
+    printNewLine();
+    printLine();
+    syso(string);
+    printLine();
+    printNewLine();
   }
 }
