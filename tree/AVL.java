@@ -1,3 +1,7 @@
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+
 public class AVL {
   static class AVLNode {
     int val, height, balance;
@@ -117,8 +121,13 @@ public class AVL {
     // System.out.println();
     // root = addNode(root, 15);
     AVLNode loopRoot = null;
+    Set<Integer> unique = new HashSet<>();
+    Random random = new Random();
     for (int i = 0; i < 20; i++) {
-      loopRoot = addNode(loopRoot, 10 * i);
+      int nmbr = random.nextInt(50);
+      if (unique.contains(nmbr)) continue;
+      unique.add(nmbr);
+      loopRoot = addNode(loopRoot, nmbr);
       display(loopRoot);
       System.out.println("--------------------------------------------");
     }
