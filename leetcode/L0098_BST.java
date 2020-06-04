@@ -22,6 +22,7 @@ public class L0098_BST {
   public boolean isValidBST(TreeNode root, int upper_bound, int lower_bound) {
     if (root == null) return true;
     if (root.data < lower_bound || root.data > upper_bound) return false;
-    return isValidBST(root.left, root.data, lower_bound); && isValidBST(root.right, upper_bound, root.data);
+    return isValidBST(root.left, root.data, lower_bound)
+        && isValidBST(root.right, upper_bound, root.data);
   }
 }

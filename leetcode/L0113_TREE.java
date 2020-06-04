@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class L0113_TREE {
   public class TreeNode {
     int val;
@@ -25,7 +27,7 @@ public class L0113_TREE {
     return answer;
   }
 
-  public void traceAllSums(TreeNode node, int sum) {
+  public void traceAllSums(TreeNode root, int sum) {
     if (root == null) return;
 
     trace.addFirst(root.val);
@@ -37,7 +39,7 @@ public class L0113_TREE {
       return;
     }
 
-    traceAllSums(node.left, decide);
-    traceAllSums(node.right, decide);
+    traceAllSums(root.left, decide);
+    traceAllSums(root.right, decide);
   }
 }
