@@ -166,8 +166,8 @@ public class GenericTree {
 
   public static GNode getTree() {
     int[] gTree = {
-      10, 20, 90, -1, 40, 120, -1, -1, 50, -1, -1, 80, -1, 30, 60, -1, 70, 110, 150, -1, -1, -1,
-      100, -1, -1, -1
+      10, 20, 90, -1, 40, 120, -1, -1, 50, -1, -1, 80, -1, 30, 60, -1, 70, 110, 150, 160, -1, -1,
+      -1, -1, 100, -1, -1, -1
     };
     return constructTree(gTree);
   }
@@ -202,12 +202,42 @@ public class GenericTree {
     System.out.println();
   }
 
+  private static int diameter = Integer.MIN_VALUE;
+
+  private static int getDiameter(GNode root) {
+    int cSize = root.getChilds().size();
+    if (cSize == 0) return 0;
+    int height = 0;
+    int max1 = 0, max2 = 0;
+    for (GNode node : root.getChilds()) {
+      int tempH = getDiameter(node);
+      if (tempH > max1) {
+        max2 = max1;
+        max1 = tempH;
+      } else if (tempH > max2) max2 = tempH;
+      height = Math.max(height, tempH);
+    }
+    int heightSum = max1 + max2;
+    diameter = Math.max(heightSum + (cSize == 1 ? 1 : 2), diameter);
+    return height + 1;
+  }
+
+  public static void getDiameter() {
+    int[] arr = {
+      1, 2, 3, -1, -1, 6, 7, 11, 12, 13, 14, -1, -1, -1, -1, 8, 9, 10, 11, 12, -1, -1, -1, -1, -1,
+      -1, -1, 4, 5, -1, -1, -1
+    };
+    int height = getDiameter(constructTree(arr));
+    System.out.println("max diameter is " + diameter + " with height " + height);
+  }
+
   public static void main(String[] args) {
     System.out.println();
-    lineralize();
-    flatten();
-    isMirror();
-    rootToNodePath();
-    genericOperations();
+    // lineralize();
+    // flatten();
+    // isMirror();
+    // rootToNodePath();
+    // genericOperations();
+    getDiameter();
   }
 }
