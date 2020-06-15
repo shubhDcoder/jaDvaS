@@ -1,7 +1,15 @@
-public class L0021_LL {
-  public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-    if (l1 == null || l2 == null) return l1 == null ? l2 : l1;
+public class L0148_LL {
 
+  public ListNode getMid(ListNode node) {
+    ListNode he = node, she = node;
+    while (she.next != null && she.next.next != null) {
+      he = he.next;
+      she = she.next.next;
+    }
+    return he;
+  }
+
+  public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
     ListNode newHead = new ListNode(-1);
     ListNode previous = newHead;
 
@@ -25,5 +33,15 @@ public class L0021_LL {
     if (l2 != null) previous.next = l2;
 
     return newHead.next;
+  }
+
+  public ListNode sortList(ListNode head) {
+    if (head == null || head.next == null) return head;
+
+    ListNode mid = getMid(head);
+    ListNode send = mid.next;
+    mid.next = null;
+
+    return mergeTwoLists(sortList(head), sortList(send));
   }
 }

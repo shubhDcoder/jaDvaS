@@ -19,17 +19,16 @@ public class L0206_LL {
   }
 
   public ListNode reverseListIterative(ListNode head) {
-    if (head == null) return null;
+    if (head == null || head.next == null) return head;
 
     ListNode previous = null;
     ListNode current = head;
-    ListNode next = current.next;
-
+    ListNode next = null;
     while (current != null) {
+      next = current.next;
       current.next = previous;
       previous = current;
       current = next;
-      if (next != null) next = next.next;
     }
 
     return previous;

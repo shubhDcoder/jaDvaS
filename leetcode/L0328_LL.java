@@ -1,6 +1,6 @@
 public class L0328_LL {
 
-  ListNode headA, headB, tailA, tailB;
+  /* ListNode headA, headB, tailA, tailB;
 
   public ListNode oddEvenList(ListNode head) {
     if (head == null) return null;
@@ -30,5 +30,23 @@ public class L0328_LL {
       }
     }
     callDFS(head.next, level + 1);
+  } */
+
+  public ListNode oddEvenList(ListNode head) {
+    if (head == null || head.next == null || head.next.next == null) return head;
+
+    ListNode headEven = head.next;
+    ListNode pointerOdd = head;
+    ListNode pointerEven = head.next;
+
+    while (pointerOdd.next != null && pointerEven.next != null) {
+      pointerOdd.next = pointerEven.next;
+      pointerEven.next = pointerEven.next.next;
+      pointerOdd = pointerOdd.next;
+      pointerEven = pointerEven.next;
+    }
+
+    pointerOdd.next = headEven;
+    return pointerOdd;
   }
 }
