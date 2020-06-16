@@ -1,5 +1,3 @@
-import java.util.*;
-
 // Definition for a Node.
 class Node {
   int val;
@@ -14,7 +12,8 @@ class Node {
 }
 
 public class L0138_LL {
-  public Node copyRandomList(Node head) {
+  // O(n) space.. to keep n linkages (hashmap)
+  /* public Node copyRandomList(Node head) {
     if (head == null) return null;
     Map<Node, Node> map = new HashMap<>();
     Node originalHead = head;
@@ -34,5 +33,41 @@ public class L0138_LL {
     }
 
     return random.next;
+  } */
+
+  // O(1) space
+  public Node copyRandomList(Node head) {
+    if (head == null) return null;
+
+    // pass 1. to create links for next nodes.
+    Node tempHead = head;
+    while (tempHead != null) {
+      Node created = new Node(tempHead.val);
+      Node tempNext = tempHead.next;
+      tempHead.next = created;
+      created.next = tempNext;
+      tempHead = tempNext;
+    }
+
+    // pass 2. to create links for random node
+    tempHead = head;
+    while (tempHead != null) {
+      if (tempHead.random != null) tempHead.next.random = tempHead.random.next;
+      tempHead = tempHead.next.next;
+    }
+
+    // pass 3. to recreate original links
+    tempHead = head;
+    Node cloned = new Node(-1);
+    Node dummy = cloned;
+    while (tempHead != null) {
+      cloned.next = tempHead.next;
+      cloned = cloned.next;
+
+      tempHead.next = cloned.next;
+
+      tempHead = tempHead.next;
+    }
+    return dummy.next;
   }
 }
