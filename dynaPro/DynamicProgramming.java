@@ -1,6 +1,8 @@
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
 
 public class DynamicProgramming {
   public static int fibonacciRecursion(int number) {
@@ -70,6 +72,18 @@ public class DynamicProgramming {
     for (int i = total - 1; i >= 0; i--)
       for (int j = 1; j <= 6 && i + j <= total; j++) dp[i] += dp[i + j];
     return dp[0];
+  }
+
+  public static int countBoardPathBest(int sum, int total) {
+    Deque<Integer> deque = new LinkedList<>();
+    deque.addFirst(1);
+    deque.addFirst(1);
+    for (int i = total - 2; i >= sum; i--) {
+      int sumOfSeven = 2 * deque.getFirst();
+      if (deque.size() < 7) deque.addFirst(sumOfSeven);
+      else deque.addFirst(deque.getFirst() * 2 - deque.removeLast());
+    }
+    return deque.getFirst();
   }
 
   public static int mazePathRecursion(int er, int ec, int sr, int sc) {
@@ -167,19 +181,24 @@ public class DynamicProgramming {
     Instant start = Instant.now();
     System.out.printf("Recursion : board path is %d\n", countBoardPathRecursion(0, total));
     Instant end = Instant.now();
-    System.out.println("Recursion : " + Duration.between(start, end).toMillis());
+    System.out.println("Recursion : " + Duration.between(start, end).toNanos());
 
     int[] dp = new int[total + 1];
     start = Instant.now();
     System.out.printf("Memoization : board path is %d\n", countBoardPathMemoization(0, total, dp));
     end = Instant.now();
-    System.out.println("Tabulation : " + Duration.between(start, end).toMillis());
+    System.out.println("Tabulation : " + Duration.between(start, end).toNanos());
 
     dp = new int[total + 1];
     start = Instant.now();
     System.out.printf("Tabulation : board path is %d\n", countBoardPathTabulation(0, total, dp));
     end = Instant.now();
-    System.out.println("Tabulation : " + Duration.between(start, end).toMillis());
+    System.out.println("Tabulation : " + Duration.between(start, end).toNanos());
+
+    start = Instant.now();
+    System.out.printf("BestOfAll   : board path is %d\n", countBoardPathBest(0, total));
+    end = Instant.now();
+    System.out.println("BestOfAll  : " + Duration.between(start, end).toNanos());
   }
 
   public static void fibonacciDriver() {
@@ -205,7 +224,7 @@ public class DynamicProgramming {
 
   public static void main(String[] args) {
     // fibonacciDriver();
-    // boardPathDriver();
+    boardPathDriver();
     // mazePathDriver();
     // boardPathWithDiceDriver();
   }
